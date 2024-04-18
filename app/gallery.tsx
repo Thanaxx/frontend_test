@@ -1,6 +1,6 @@
-"use client";
 
-import { useState } from "react";
+"use client";
+import React, { useEffect, useState } from 'react';
 import Avatar from "boring-avatars";
 import {
   FaRegCircleXmark,
@@ -9,16 +9,19 @@ import {
   FaEnvelope,
 } from "react-icons/fa6";
 
+
 import Modal from "./modal";
 
-import { User } from "./types/user";
+interface UserData {
+    id: number;
+    name: string;
+}
 
-export type GalleryProps = {
-  users: User[];
-};
-const Gallery = ({ users }: GalleryProps) => {
-  const [usersList, setUsersList] = useState(users);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+const Gallery: React.FC = () => {
+  const [userData, setUserData] = useState([]);
+
+  const [usersList, setUsersList] = useState(userData);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = (id: number) => {
@@ -35,11 +38,32 @@ const Gallery = ({ users }: GalleryProps) => {
     setIsModalOpen(false);
   };
 
-  return (
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [sortedData, setSortedData] = useState([]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('https://api.openbrewerydb.org/v1/breweries');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+                const userData: UserData = await response.json();
+                setUserData(userData);
+                console.log(userData)
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    return (
     <div className="user-gallery">
-      <h1 className="heading">Users</h1>
+        <h1>Users</h1>
       <div className="items">
-        {usersList.map((user, index) => (
+        {userData.map((user, index) => (
           <div
             className="item user-card"
             key={index}
@@ -55,7 +79,7 @@ const Gallery = ({ users }: GalleryProps) => {
             </div>
             <div className="info">
               <div className="name">{user.name}</div>
-              <div className="company">{user.company.name}</div>
+              <div className="company">{user.state}</div>
             </div>
           </div>
         ))}
@@ -116,7 +140,7 @@ const Gallery = ({ users }: GalleryProps) => {
         </Modal>
       </div>
     </div>
-  );
+    );
 };
 
 export default Gallery;
