@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -9,16 +10,19 @@ import {
   FaEnvelope,
 } from "react-icons/fa6";
 
+
 import Modal from "./modal";
 
-import { User } from "./types/user";
+interface UserData {
+    id: number;
+    name: string;
+}
 
-export type GalleryProps = {
-  users: User[];
-};
-const Gallery = ({ users }: GalleryProps) => {
-  const [usersList, setUsersList] = useState(users);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+const Gallery: React.FC = () => {
+  const [userData, setUserData] = useState([]);
+
+  const [usersList, setUsersList] = useState(userData);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = (id: number) => {
@@ -35,11 +39,12 @@ const Gallery = ({ users }: GalleryProps) => {
     setIsModalOpen(false);
   };
 
-  return (
+    return (
     <div className="user-gallery">
       <h1 className="heading">Users</h1>
       <div className="items">
-        {usersList.map((user, index) => (
+        
+        {userData.map((user, index) => (
           <div
             className="item user-card"
             key={index}
@@ -55,7 +60,7 @@ const Gallery = ({ users }: GalleryProps) => {
             </div>
             <div className="info">
               <div className="name">{user.name}</div>
-              <div className="company">{user.company.name}</div>
+              <div className="company">{user.state}</div>
             </div>
           </div>
         ))}
@@ -89,17 +94,17 @@ const Gallery = ({ users }: GalleryProps) => {
                     />
                   </div>
                   <div className="name">
-                    {selectedUser.name} ({selectedUser.username})
+                    {selectedUser.name} ({selectedUser.name})
                   </div>
                   <div className="field">
                     <FaLocationDot className="icon" />
-                    <div className="data">{`${selectedUser.address.street}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}</div>
+                    <div className="data">{`${selectedUser.address_1}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}</div>
                   </div>
                   <div className="field">
                     <FaPhone className="icon" />
                     <div className="value">{selectedUser.phone}</div>
                   </div>
-                  <div className="fields">
+                  <div className="field">
                     <FaEnvelope className="icon" />
                     <div className="value">{selectedUser.email}</div>
                   </div>
@@ -116,7 +121,7 @@ const Gallery = ({ users }: GalleryProps) => {
         </Modal>
       </div>
     </div>
-  );
+    );
 };
 
 export default Gallery;

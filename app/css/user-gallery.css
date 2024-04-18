@@ -1,0 +1,48 @@
+.user-gallery {
+  width: 100%;
+}
+.user-gallery > .items {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 16px;
+}
+@media screen and (min-width: 768.1px) {
+  .user-gallery > .items {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 701px) and (max-width: 1120px) {
+  .user-gallery > .items {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.user-gallery > .heading + .items {
+  margin-top: 32px;
+}
+.user-gallery > .sort-items {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.user-gallery > .sort-items .heading {
+  font-size: 30px;
+}
+.user-gallery > .sort-items .items-select {
+  display: flex;
+  justify-content: space-between;
+}
+.user-gallery > .sort-items .items-select-opt {
+  display: flex;
+  justify-content: space-around;
+  justify-items: center;
+  margin: 0 10px;
+}
+.user-gallery > .sort-items .items-select-opt p {
+  padding: 17px 10px;
+  font-weight: 600;
+}
+.user-gallery > .sort-items .selector {
+  padding: 20px 10px;
+  outline: none;
+}/*# sourceMappingURL=user-gallery.css.map */

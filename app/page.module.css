@@ -7,6 +7,20 @@
   min-height: 100vh;
 }
 
+/* Mobile View */
+@media (max-width: 700px) {
+  .main {
+    padding: 1rem;
+  }
+}
+
+/* Tablet View */
+@media (min-width: 701px) and (max-width: 1120px){
+  .main {
+    padding: 1rem;
+  }
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
