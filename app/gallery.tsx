@@ -1,6 +1,8 @@
 "use client";
-
+import React from "react";
 import { useState } from "react";
+//install react-select
+import Select from 'react-select';
 import Avatar from "boring-avatars";
 import {
   FaRegCircleXmark,
@@ -8,6 +10,7 @@ import {
   FaPhone,
   FaEnvelope,
 } from "react-icons/fa6";
+
 
 import Modal from "./modal";
 
@@ -35,9 +38,74 @@ const Gallery = ({ users }: GalleryProps) => {
     setIsModalOpen(false);
   };
 
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionB, setSelectedOptionB] = useState(null);
+  const [sortedData, setSortedData] = useState([]);
+
+
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+
+    const sorted = usersList.sort((a, b) => {
+      if (selectedOption.value === 'asc') {
+        return a.name.localeCompare(b.name);
+      } else {
+        return b.name.localeCompare(a.name);
+      }
+    });
+    setSortedData;
+  };
+
+  const handleSelectChangeB = (selectedOptionB) => {
+    setSelectedOptionB(selectedOptionB);
+
+    const sortedb = usersList.sort((a, b) => {
+      if (selectedOptionB.value === 'company') {
+        return a.company.name.localeCompare(b.company.name);
+      }
+      else {
+        return b.company.name.localeCompare(a.company.name);
+      }
+    });
+    setSortedData;
+  };
+
   return (
     <div className="user-gallery">
-      <h1 className="heading">Users</h1>
+        <div className="sort-items">
+   
+            <div>
+              <p className="heading"><b>Users</b></p>
+            </div>
+
+            <div className="items-select">
+              <div className="items-select-opt">
+                <p>Sort Field</p>
+                <Select
+                  className="selector"
+                  value={selectedOptionB}
+                  onChange={handleSelectChangeB}
+                  options={[
+                    { value: 'name', label: 'Name' },
+                    { value: 'company', label: 'Company' },
+                  ]}/>
+              </div>
+
+              <div className="items-select-opt">
+                <p>Sort Direction</p>
+                <Select
+                className="selector"
+                  value={selectedOption}
+                  onChange={handleSelectChange}
+                  options={[
+                    { value: 'asc', label: 'Ascending' },
+                    { value: 'desc', label: 'Descending' },
+                  ]}/>
+              </div>
+            </div>
+  
+        </div>
+
       <div className="items">
         {usersList.map((user, index) => (
           <div

@@ -1,0 +1,36 @@
+.user-info > .avatar {
+  display: flex;
+  justify-content: center;
+}
+.user-info > .name {
+  font-size: 27px;
+  font-weight: 600;
+}
+.user-info > .field {
+  display: flex;
+}
+.user-info > .field + .company {
+  margin-top: 24px;
+}
+.user-info > .avatar + .name {
+  margin-top: 24px;
+}
+.user-info > .name + .field {
+  margin-top: 16px;
+}
+.user-info > .field > .icon {
+  flex: 0 0 16px;
+}
+.user-info > .field > .value {
+  color: #7a869a;
+}
+.user-info > .company > .name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.user-info > .company > .catchphrase {
+  font-style: italic;
+}
+.user-info > .field > .icon + .value {
+  margin-left: 8px;
+}/*# sourceMappingURL=user-info.css.map */
