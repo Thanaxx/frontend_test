@@ -113,11 +113,11 @@ const Gallery: React.FC = () => {
                     />
                   </div>
                   <div className="name">
-                    {selectedUser.name} ({selectedUser.username})
+                    {selectedUser.name} ({selectedUser.name})
                   </div>
                   <div className="field">
                     <FaLocationDot className="icon" />
-                    <div className="data">{`${selectedUser.address.street}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}</div>
+                    <div className="data">{`${selectedUser.address_1}, ${selectedUser.address.suite}, ${selectedUser.address.city}`}</div>
                   </div>
                   <div className="field">
                     <FaPhone className="icon" />
