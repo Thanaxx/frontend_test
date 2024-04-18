@@ -43,6 +43,7 @@ const Gallery: React.FC = () => {
     <div className="user-gallery">
       <h1 className="heading">Users</h1>
       <div className="items">
+        
         {userData.map((user, index) => (
           <div
             className="item user-card"
