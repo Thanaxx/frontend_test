@@ -1,6 +1,7 @@
 
 "use client";
-import React, { useEffect, useState } from 'react';
+
+import { useState } from "react";
 import Avatar from "boring-avatars";
 import {
   FaRegCircleXmark,
@@ -38,30 +39,9 @@ const Gallery: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [sortedData, setSortedData] = useState([]);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch('https://api.openbrewerydb.org/v1/breweries');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
-                const userData: UserData = await response.json();
-                setUserData(userData);
-                console.log(userData)
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
-
     return (
     <div className="user-gallery">
-        <h1>Users</h1>
+      <h1 className="heading">Users</h1>
       <div className="items">
         {userData.map((user, index) => (
           <div
